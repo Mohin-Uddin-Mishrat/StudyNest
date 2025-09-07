@@ -91,7 +91,7 @@ export const getLecture = async (req, res) => {
 // @access  Private/Admin
 export const createLecture = async (req, res) => {
   try {
-    const { title, moduleId, videoUrl, pdfs } = req.body;
+    const { title, moduleId, videoUrl } = req.body;
 
     // Check if module exists
     const module = await Module.findById(moduleId);
@@ -109,8 +109,7 @@ export const createLecture = async (req, res) => {
       title,
       order: nextOrder,
       moduleId,
-      videoUrl,
-      pdfs: pdfs || []
+      videoUrl
     });
 
     res.status(201).json(lecture);
@@ -124,7 +123,7 @@ export const createLecture = async (req, res) => {
 // @access  Private/Admin
 export const updateLecture = async (req, res) => {
   try {
-    const { title, order, videoUrl, pdfs } = req.body;
+    const { title, order, videoUrl } = req.body;
 
     const lecture = await Lecture.findById(req.params.id);
 
@@ -145,7 +144,6 @@ export const updateLecture = async (req, res) => {
       lecture.title = title || lecture.title;
       lecture.order = order || lecture.order;
       lecture.videoUrl = videoUrl || lecture.videoUrl;
-      lecture.pdfs = pdfs !== undefined ? pdfs : lecture.pdfs;
 
       const updatedLecture = await lecture.save();
       res.json(updatedLecture);

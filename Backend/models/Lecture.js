@@ -22,21 +22,7 @@ const lectureSchema = new mongoose.Schema({
     required: [true, 'Video URL is required'],
     trim: true
   },
-  pdfs: [{
-    name: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    path: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    size: {
-      type: Number
-    }
-  }]
+
 }, {
   timestamps: true
 });
